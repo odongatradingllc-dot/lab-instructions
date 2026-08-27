@@ -1,6 +1,6 @@
 ---
 title: "Lab 01 - Hello R!"
-author: "[Your Name]"
+author: "[Ken Hayes]"
 output: 
   tufte::tufte_html:
     css: ../lab.css
