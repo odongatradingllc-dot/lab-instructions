@@ -8,7 +8,7 @@ output:
     keep_tex: true
   tufte::tufte_html:
     css: ../lab.css
-    tutle_variant: "envisioned"
+    tufte_variant: "envisioned"
     highlight: pygments
 link-citations: yes
 ---
@@ -69,7 +69,7 @@ Step 3. Click **Knit** to make sure the document compiles
 
 **Step 4:** Push to GitHub and verify the changes are visible in your repo.
 
-🧶 ✅ ⬆️ **Knit, commit with message "Completed warm up", and push your changes.**
+🧶 ✅ ⬆️ **Knit, commit with message "Updated author name", and push your changes.**
 
 ---
 
