@@ -2,15 +2,15 @@
 title: "Lab 01 - Hello R!"
 author: "[Ken Hayes]"
 output: 
-  tufte::tufte_html:
-    css: ../lab.css
-    tufte_variant: "envisioned"
-    highlight: pygments
   tufte::tufte_handout:
     latex_engine: xelatex
     highlight: pygments
     keep_tex: true
     citation_package: natbib
+  tufte::tufte_html:
+    css: ../lab.css
+    tufte_variant: "envisioned"
+    highlight: pygments
 link-citations: true
 ---
 
@@ -56,14 +56,14 @@ By the end of this lab, you will be able to:
 
 **Important:** This lab should be completed in your **forked lab-instructions repository** that you set up at the beginning of the semester. If you haven't forked the repository yet, go back to the README in the lab-instructions repo and follow those instructions first.
 
-### Step 1: Navigate to the Lab
+## Step 1: Navigate to the Lab
 
 1. Open JupyterHub and launch RStudio
 2. Navigate to your `lab-instructions` repository
 3. Open the `Lab01` folder
 4. Open the file `lab-01-hello-r.Rmd`
 
-### Step 2: Verify Setup
+## Step 2: Verify Setup
 
 Before you begin, make sure:
 - The file opens in the RStudio editor (top left pane)
@@ -72,7 +72,7 @@ Before you begin, make sure:
 
 **If the Git pane shows the course organization name instead of yours, you need to fork the repository first!**
 
-### Step 3: Test Knit
+## Step 3: Test Knit
 
 Click the **Knit** button to make sure the document compiles without errors. You should see an HTML output.
 
@@ -90,7 +90,7 @@ Before we introduce the data, let's warm up with some simple exercises.
 The top portion of your R Markdown file (between the three dashed lines) is called YAML. It stands for "YAML Ain't Markup Language". It is a human friendly data serialization standard for all programming languages. All you need to know is that this area is called the YAML (we will refer to it as such) and that it contains meta information about your document.
 ```
 
-### YAML
+## YAML
 
 Open the R Markdown (Rmd) file in your project, change the author name to your name, and knit the document.
 
@@ -98,7 +98,7 @@ Open the R Markdown (Rmd) file in your project, change the author name to your n
 knitr::include_graphics("img/yaml-raw-to-rendered.png")
 ```
 
-### Committing changes
+## Committing changes
 
 Then go to the Git pane in your RStudio.
 
@@ -110,7 +110,7 @@ knitr::include_graphics("img/update-author-name-commit.png")
 
 You don't have to commit after every change, this would get quite cumbersome. You should consider committing states that are *meaningful to you* for inspection, comparison, or restoration. In the first few assignments we will tell you exactly when to commit and in some cases, what commit message to use. As the semester progresses we will let you make these decisions.
 
-### Pushing changes
+## Pushing changes
 
 Now that you have made an update and committed this change, it's time to push these changes to the web! Or more specifically, to your repo on GitHub. Why? So that others can see your changes. And by others, we mean the course teaching team (your repos in this course are private to you and us, only).
 
@@ -347,7 +347,7 @@ Every lab has two required parts, both due by the deadline:
 1. **Push to GitHub** — your completed `.Rmd`, committed and pushed (covered above)
 2. **Upload a PDF to this lab's Canvas assignment** — see below
 
-### Generate Your PDF
+## Generate Your PDF
 
 PDF generation trips people up more than the actual R code does — if it doesn't work on the first try, that's normal, not a sign you did something wrong.
 
