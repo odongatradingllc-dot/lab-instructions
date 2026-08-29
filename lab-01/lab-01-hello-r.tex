@@ -1,0 +1,788 @@
+\documentclass[]{tufte-handout}
+
+% ams
+\usepackage{amssymb,amsmath}
+
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \makeatletter
+  \@ifpackageloaded{fontspec}{}{\usepackage{fontspec}}
+  \makeatother
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \makeatletter
+  \@ifpackageloaded{soul}{
+     \renewcommand\allcapsspacing[1]{{\addfontfeature{LetterSpace=15}#1}}
+     \renewcommand\smallcapsspacing[1]{{\addfontfeature{LetterSpace=10}#1}}
+   }{}
+  \makeatother
+
+\fi
+
+% graphix
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+
+% booktabs
+\usepackage{booktabs}
+
+% url
+\usepackage{url}
+
+% hyperref
+\usepackage{hyperref}
+
+% units.
+\usepackage{units}
+
+
+\setcounter{secnumdepth}{-1}
+
+% citations
+\usepackage{natbib}
+\bibliographystyle{plainnat}
+
+
+% pandoc syntax highlighting
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{\textbf{#1}}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+
+% table with pandoc
+
+% multiplecol
+\usepackage{multicol}
+
+% strikeout
+\usepackage[normalem]{ulem}
+
+% morefloats
+\usepackage{morefloats}
+
+
+% tightlist macro required by pandoc >= 1.14
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% title / author / date
+\title{Lab 01 - Hello R!}
+\author{{[}Ken Hayes{]}}
+\date{}
+
+
+\begin{document}
+
+\maketitle
+
+
+
+
+\begin{marginfigure}
+R is the name of the programming language itself and RStudio is a
+convenient interface.
+\end{marginfigure}
+
+The main goal of this lab is to introduce you to R and RStudio, which we
+will be using throughout the course both to learn the statistical
+concepts discussed in the course and to analyze real data and come to
+informed conclusions.
+
+\begin{marginfigure}
+git is a version control system (like ``Track Changes'' features from
+Microsoft Word on steroids) and GitHub is the home for your Git-based
+projects on the internet (like DropBox but much, much better).
+\end{marginfigure}
+
+An additional goal is to introduce you to Git and GitHub, which is the
+collaboration and version control system that we will be using
+throughout the course.
+
+As the labs progress, you are encouraged to explore beyond what the labs
+dictate; a willingness to experiment will make you a much better
+programmer. Before we get to that stage, however, you need to build some
+basic fluency in R. Today we begin with the fundamental building blocks
+of R and RStudio: the interface, reading in data, and basic commands.
+
+And to make versioning simpler, this is a solo lab. Additionally, we
+want to make sure everyone gets a significant amount of time at the
+steering wheel. In future labs you'll learn about collaborating on
+GitHub and produce a single lab report for your team.
+
+\subsection{Learning Objectives}\label{learning-objectives}
+
+By the end of this lab, you will be able to:
+
+\begin{itemize}
+\tightlist
+\item
+  Navigate the RStudio interface
+\item
+  Edit and knit R Markdown documents
+\item
+  Use Git for version control (commit and push changes)
+\item
+  Load R packages
+\item
+  Create basic visualizations with ggplot2
+\item
+  Calculate summary statistics
+\item
+  Understand why visualization is important for data analysis
+\end{itemize}
+
+\subsection{Before You Begin}\label{before-you-begin}
+
+\textbf{Prerequisites:} - ✅ You have a GitHub account - ✅ You have
+accepted the invitation to the course GitHub organization - ✅ You can
+access JupyterHub and RStudio - ✅ You have watched the ``Meet the
+toolkit'' lecture videos
+
+\textbf{If you haven't completed these yet, take care of them before
+continuing} --- the rest of this lab assumes they're done.
+
+\subsection{Getting Started}\label{getting-started}
+
+\textbf{Important:} This lab should be completed in your \textbf{forked
+lab-instructions repository} that you set up at the beginning of the
+semester. If you haven't forked the repository yet, go back to the
+README in the lab-instructions repo and follow those instructions first.
+
+\subsection{Step 1: Navigate to the
+Lab}\label{step-1-navigate-to-the-lab}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Open JupyterHub and launch RStudio
+\item
+  Navigate to your \texttt{lab-instructions} repository
+\item
+  Open the \texttt{Lab01} folder
+\item
+  Open the file \texttt{lab-01-hello-r.Rmd}
+\end{enumerate}
+
+\subsection{Step 2: Verify Setup}\label{step-2-verify-setup}
+
+Before you begin, make sure: - The file opens in the RStudio editor (top
+left pane) - You can see the Git pane (top right) - The Git pane shows
+your repository name with YOUR username (not the course organization)
+
+\textbf{If the Git pane shows the course organization name instead of
+yours, you need to fork the repository first!}
+
+\subsection{Step 3: Test Knit}\label{step-3-test-knit}
+
+Click the \textbf{Knit} button to make sure the document compiles
+without errors. You should see an HTML output.
+
+\textbf{If knitting fails:}
+
+\begin{itemize}
+\tightlist
+\item
+  Check that you have the required packages installed
+\item
+  Make sure you're in the correct working directory
+\item
+  Ask for help if you can't resolve the error
+\end{itemize}
+
+\subsection{Warm up}\label{warm-up}
+
+Before we introduce the data, let's warm up with some simple exercises.
+
+\begin{marginfigure}
+The top portion of your R Markdown file (between the three dashed lines)
+is called YAML. It stands for ``YAML Ain't Markup Language''. It is a
+human friendly data serialization standard for all programming
+languages. All you need to know is that this area is called the YAML (we
+will refer to it as such) and that it contains meta information about
+your document.
+\end{marginfigure}
+
+\subsection{YAML}\label{yaml}
+
+Open the R Markdown (Rmd) file in your project, change the author name
+to your name, and knit the document.
+
+\begin{figure*}
+\includegraphics[width=25.83in,alt={Screenshot comparing the raw YAML header text in an R Markdown file to how the title and author render at the top of the knitted document.}]{img/yaml-raw-to-rendered} \end{figure*}
+
+\subsection{Committing changes}\label{committing-changes}
+
+Then go to the Git pane in your RStudio.
+
+If you have made changes to your Rmd file, you should see it listed
+here. Click on it to select it in this list and then click on
+\textbf{Diff}. This shows you the \emph{diff}erence between the last
+committed state of the document and its current state that includes your
+changes. If you're happy with these changes, write ``Update author
+name'' in the \textbf{Commit message} box and hit \textbf{Commit}.
+
+\begin{figure*}
+\includegraphics[width=24.69in,alt={Screenshot of the RStudio Git commit dialog, showing the changed file checked, the diff view, a commit message box with 'Update author name' typed in, and the Commit button.}]{img/update-author-name-commit} \end{figure*}
+
+You don't have to commit after every change, this would get quite
+cumbersome. You should consider committing states that are
+\emph{meaningful to you} for inspection, comparison, or restoration. In
+the first few assignments we will tell you exactly when to commit and in
+some cases, what commit message to use. As the semester progresses we
+will let you make these decisions.
+
+\subsection{Pushing changes}\label{pushing-changes}
+
+Now that you have made an update and committed this change, it's time to
+push these changes to the web! Or more specifically, to your repo on
+GitHub. Why? So that others can see your changes. And by others, we mean
+the course teaching team (your repos in this course are private to you
+and us, only).
+
+In order to push your changes to GitHub, click on \textbf{Push}. This
+will prompt a dialogue box where you first need to enter your user name,
+and then your password. This might feel cumbersome. Bear with me\ldots{}
+We \emph{will} teach you how to save your password so you don't have to
+enter it every time. But for this one assignment you'll have to manually
+enter each time you push in order to gain some experience with it.
+
+\textbf{Why push?} Your local commits are only on your computer until
+you push them to GitHub. Pushing makes them visible in your online
+repository.
+
+\textbf{✓ Checkpoint:} Go to your forked repository on GitHub (in your
+web browser) and refresh the page. You should see your updated file with
+your name in it!
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{The Workflow Pattern:}
+
+Throughout this course, you'll see this pattern:
+
+🧶 \textbf{Knit} → ✅ \textbf{Commit} → ⬆️ \textbf{Push}
+
+Get comfortable with it - you'll use it in every lab and homework
+assignment!
+
+\subsection{Packages}\label{packages}
+
+\begin{marginfigure}
+Packages are like apps for R - they add new functions and capabilities.
+We load them at the beginning of our analysis.
+\end{marginfigure}
+
+In this lab we will work with two packages: \textbf{datasauRus} which
+contains the dataset we'll be using and \textbf{tidyverse} which is a
+collection of packages for doing data analysis in a ``tidy'' way. These
+packages are already installed for you. You can load the packages by
+running the following in the Console.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse) }
+\FunctionTok{library}\NormalTok{(datasauRus)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{How to run this code:} 1. Click in the Console (bottom left
+pane) 2. Type (or copy/paste) the code above 3. Press Enter
+
+Note that the packages are also loaded with the same commands in your R
+Markdown document.
+
+\subsection{Data}\label{data}
+
+\begin{marginfigure}
+If it's confusing that the data frame is called
+\texttt{datasaurus\_dozen} when it contains 13 datasets, you're not
+alone! Have you heard of a
+\href{https://en.wikipedia.org/wiki/Dozen\#Baker's_dozen}{baker's
+dozen}?
+\end{marginfigure}
+
+The data frame we will be working with today is called
+\texttt{datasaurus\_dozen} and it's in the \texttt{datasauRus} package.
+Actually, this single data frame contains 13 datasets, designed to show
+us why data visualization is important and how summary statistics alone
+can be misleading. The different datasets are marked by the
+\texttt{dataset} variable.
+
+To find out more about the dataset, type the following in your Console:
+\texttt{?datasaurus\_dozen}. A question mark before the name of an
+object will always bring up its help file. This command must be ran in
+the Console.
+
+\textbf{Pro tip:} A question mark before the name of any object will
+bring up its help file. This only works in the Console, not in your R
+Markdown document.
+
+\subsection{Exercises}\label{exercises}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Based on the help file, how many rows and how many columns does the
+  \texttt{datasaurus\_dozen} file have? What are the variables included
+  in the data frame? Add your responses to your lab report.
+\end{enumerate}
+
+\textbf{Your answer:} {[}type your answer here{]}
+
+Let's take a look at what these datasets are. To do so we can make a
+\emph{frequency table} of the dataset variable:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{datasaurus\_dozen }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(dataset) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{print}\NormalTok{(}\DecValTok{13}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble:
+## #   13 x 2
+##    dataset   
+##    <chr>     
+##  1 away      
+##  2 bullseye  
+##  3 circle    
+##  4 dino      
+##  5 dots      
+##  6 h_lines   
+##  7 high_lines
+##  8 slant_down
+##  9 slant_up  
+## 10 star      
+## 11 v_lines   
+## 12 wide_lines
+## 13 x_shape   
+## # i 1 more
+## #   variable:
+## #   n <int>
+\end{verbatim}
+
+\begin{marginfigure}
+Matejka, Justin, and George Fitzmaurice. ``Same stats, different graphs:
+Generating datasets with varied appearance and identical statistics
+through simulated annealing.'' Proceedings of the 2017 CHI Conference on
+Human Factors in Computing Systems. ACM, 2017.
+\end{marginfigure}
+
+The original Datasaurus (\texttt{dino}) was created by Alberto Cairo in
+\href{http://www.thefunctionalart.com/2016/08/download-datasaurus-never-trust-summary.html}{this
+great blog post}. The other Dozen were generated using simulated
+annealing and the process is described in the paper \emph{Same Stats,
+Different Graphs: Generating Datasets with Varied Appearance and
+Identical Statistics} through Simulated Annealing by Justin Matejka and
+George Fitzmaurice. In the paper, the authors simulate a variety of
+datasets that have the same summary statistics as the Datasaurus but
+have very different distributions.
+
+🧶 ✅ ⬆️ \emph{Knit, commit, and push your changes to GitHub with the
+commit message ``Added answer for Ex 1''. Make sure to commit and push
+all changed files so that your Git pane is cleared up afterwards.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Plot \texttt{y} vs.~\texttt{x} for the \texttt{dino} dataset. Then,
+  calculate the correlation coefficient between \texttt{x} and
+  \texttt{y} for this dataset.
+\end{enumerate}
+
+Below is the code you will need to complete this exercise. Basically,
+the answer is already given, but you need to include relevant bits in
+your Rmd document and successfully knit it and view the results.
+
+Start with the \texttt{datasaurus\_dozen} and pipe it into the
+\texttt{filter} function to filter for observations where
+\texttt{dataset\ ==\ "dino"}. Store the resulting filtered data frame as
+a new data frame called \texttt{dino\_data}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dino\_data }\OtherTok{\textless{}{-}}\NormalTok{ datasaurus\_dozen }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(dataset }\SpecialCharTok{==} \StringTok{"dino"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+There is a lot going on here, so let's slow down and unpack it a bit.
+
+First, the pipe operator: \texttt{\%\textgreater{}\%}, takes what comes
+before it and sends it as the first argument to what comes after it. So
+here, we're saying \texttt{filter} the \texttt{datasaurus\_dozen} data
+frame for observations where \texttt{dataset\ ==\ "dino"}.
+
+Second, the assignment operator: \texttt{\textless{}-}, assigns the name
+\texttt{dino\_data} to the filtered data frame.
+
+Next, we need to visualize these data. We will use the \texttt{ggplot}
+function for this. Its first argument is the data you're visualizing.
+Next we define the \texttt{aes}thetic mappings. In other words, the
+columns of the data that get mapped to certain aesthetic features of the
+plot, e.g.~the \texttt{x} axis will represent the variable called
+\texttt{x} and the \texttt{y} axis will represent the variable called
+\texttt{y}. Then, we add another layer to this plot where we define
+which \texttt{geom}etric shapes we want to use to represent each
+observation in the data. In this case we want these to be points, hence
+\texttt{geom\_point}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ dino\_data, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x, }\AttributeTok{y =}\NormalTok{ y)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure*}
+\includegraphics[alt={Scatterplot of y versus x for the dino dataset, with points forming the outline of a dinosaur.}]{lab-01-hello-r_files/figure-latex/unnamed-chunk-10-1} \end{figure*}
+
+If this seems like a lot, it is. And you will learn about the philosophy
+of building data visualizations in layer in detail next week. For now,
+follow along with the code that is provided.
+
+For the second part of these exercises, we need to calculate a summary
+statistic: the correlation coefficient. Correlation coefficient, often
+referred to as \(r\) in statistics, measures the linear association
+between two variables. You will see that some of the pairs of variables
+we plot do not have a linear relationship between them. This is exactly
+why we want to visualize first: visualize to assess the form of the
+relationship, and calculate \(r\) only if relevant. In this case,
+calculating a correlation coefficient really doesn't make sense since
+the relationship between \texttt{x} and \texttt{y} is definitely not
+linear -- it's dinosaurial!
+
+But, for illustrative purposes, let's calculate the correlation
+coefficient between \texttt{x} and \texttt{y}.
+
+\begin{marginfigure}
+Start with \texttt{dino\_data} and calculate a summary statistic that we
+will call \texttt{r} as the \texttt{cor}relation between \texttt{x} and
+\texttt{y}.
+\end{marginfigure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dino\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{r =} \FunctionTok{cor}\NormalTok{(x, y))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 1
+##         r
+##     <dbl>
+## 1 -0.0645
+\end{verbatim}
+
+🧶 ✅ ⬆️ \emph{Knit, commit, and push your changes to GitHub with the
+commit message ``Added answer for Ex 2''. Make sure to commit and push
+all changed files so that your Git pane is cleared up afterwards.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Plot \texttt{y} vs.~\texttt{x} for the \texttt{star} dataset. You can
+  (and should) reuse code we introduced above, just replace the dataset
+  name with the desired dataset. Then, calculate the correlation
+  coefficient between \texttt{x} and \texttt{y} for this dataset. How
+  does this value compare to the \texttt{r} of \texttt{dino}?
+\end{enumerate}
+
+\textbf{Your task:} Adapt the code from Exercise 2, changing
+\texttt{"dino"} to \texttt{"star"}.
+
+\textbf{Step 1: Filter for star data}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{star\_data }\OtherTok{\textless{}{-}}\NormalTok{ datasaurus\_dozen }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(dataset }\SpecialCharTok{==}\NormalTok{ \_\_\_)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Step 2: Create the plot}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ \_\_\_, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x, }\AttributeTok{y =}\NormalTok{ y)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Step 3: Calculate correlation}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{star\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{r =} \FunctionTok{cor}\NormalTok{(x, y))}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Write your answers:}
+
+\begin{itemize}
+\item
+  The correlation coefficient for the star dataset is: {[}type your
+  answer here{]}
+\item
+  Compared to the dino dataset (r = -0.06447185), the star dataset's
+  correlation is: {[}type your answer here{]}
+\end{itemize}
+
+🧶 ✅ ⬆️ \emph{This is another good place to pause, knit, commit changes
+with the commit message ``Added answer for Ex 3'', and push. Make sure
+to commit and push all changed files so that your Git pane is cleared up
+afterwards.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Plot \texttt{y} vs.~\texttt{x} for the \texttt{circle} dataset. You
+  can (and should) reuse code we introduced above, just replace the
+  dataset name with the desired dataset. Then, calculate the correlation
+  coefficient between \texttt{x} and \texttt{y} for this dataset. How
+  does this value compare to the \texttt{r} of \texttt{dino}?
+\end{enumerate}
+
+\textbf{Your task:} Adapt the code from Exercises 2 and 3, changing the
+dataset to \texttt{"circle"}.
+
+\textbf{Filter, plot, and calculate correlation:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Your code here}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Your code here}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Your code here}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Write your answers:}
+
+\begin{itemize}
+\item
+  The correlation coefficient for the circle dataset is: {[}type your
+  answer here{]}
+\item
+  Compared to the dino dataset, the circle dataset's correlation is:
+  {[}type your answer here{]}
+\item
+  What do you notice about the correlation coefficients for dino, star,
+  and circle? {[}type your answer here{]}
+\end{itemize}
+
+🧶 ✅ ⬆️ \emph{You should pause again, commit changes with the commit
+message ``Added answer for Ex 4'', and push. Make sure to commit and
+push all changed files so that your Git pane is cleared up afterwards.}
+
+\begin{marginfigure}
+Facet by the dataset variable, placing the plots in a 3 column grid, and
+don't add a legend.
+\end{marginfigure}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Finally, let's plot all datasets at once. In order to do this we will
+  make use of faceting.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(datasaurus\_dozen, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x, }\AttributeTok{y =}\NormalTok{ y, }\AttributeTok{color =}\NormalTok{ dataset))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ dataset, }\AttributeTok{ncol =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+And we can use the \texttt{group\_by} function to generate all the
+summary correlation coefficients.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{datasaurus\_dozen }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(dataset) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{r =} \FunctionTok{cor}\NormalTok{(x, y)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{print}\NormalTok{(}\DecValTok{13}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+You're done with the data analysis exercises, but we'd like you to do
+two more things:
+
+\begin{marginfigure}
+\includegraphics[width=13in,alt={Screenshot of the R Markdown 'Output Options' dialog with the Figures tab open, showing height and width fields for global figure sizing.}]{img/fig-resize-global} \end{marginfigure}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Resize your figures:}
+\end{itemize}
+
+Click on the gear icon in on top of the R Markdown document, and select
+``Output Options\ldots{}'' in the dropdown menu. In the pop up dialogue
+box go to the Figures tab and change the height and width of the
+figures, and hit OK when done. Then, knit your document and see how you
+like the new sizes. Change and knit again and again until you're happy
+with the figure sizes. Note that these values get saved in the YAML.
+
+\begin{marginfigure}
+\includegraphics[width=17.6in,alt={Screenshot of a code chunk's gear icon menu in RStudio, showing fig.width and fig.height options for sizing a single figure.}]{img/fig-resize-local} \end{marginfigure}
+
+You can also use different figure sizes for differen figures. To do so
+click on the gear icon within the chunk where you want to make a change.
+Changing the figure sizes added new options to these chunks:
+\texttt{fig.width} and \texttt{fig.height}. You can change them by
+defining different values directly in your R Markdown document as well.
+
+\begin{marginfigure}
+\includegraphics[width=12.97in,alt={Screenshot of the R Markdown 'Output Options' General tab, showing dropdown menus for syntax highlighting and document theme.}]{img/theme-highlight} \end{marginfigure}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Change the look of your report:}
+\end{itemize}
+
+Once again click on the gear icon in on top of the R Markdown document,
+and select ``Output Options\ldots{}'' in the dropdown menu. In the
+General tab of the pop up dialogue box try out different Syntax
+highlighting and theme options. Hit OK and knit your document to see how
+it looks. Play around with these until you're happy with the look.
+
+\begin{marginfigure}
+Not sure how to use emojis on your computer? Maybe a teammate can help?
+Or you can ask your TA as well!
+\end{marginfigure}
+
+🧶 ✅ ⬆️ \emph{Yay, you're done! Commit all remaining changes, use the
+commit message ``Done with Lab 1!} 💪\emph{``, and push. Make sure to
+commit and push all changed files so that your Git pane is cleared up
+afterwards. Before you wrap up the assignment, make sure all documents
+are updated on your GitHub repo.}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Submitting Your Work}\label{submitting-your-work}
+
+Every lab has two required parts, both due by the deadline:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Push to GitHub} --- your completed \texttt{.Rmd}, committed
+  and pushed (covered above)
+\item
+  \textbf{Upload a PDF to this lab's Canvas assignment} --- see below
+\end{enumerate}
+
+\subsection{Generate Your PDF}\label{generate-your-pdf}
+
+PDF generation trips people up more than the actual R code does --- if
+it doesn't work on the first try, that's normal, not a sign you did
+something wrong.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Click the \textbf{Knit} dropdown arrow (next to the Knit button)
+\item
+  Select \textbf{Knit to PDF} (this uses the Tufte Handout format
+  defined in the YAML)
+\item
+  Wait for the PDF to generate
+\item
+  Find \texttt{lab-01-hello-r.pdf} in the \textbf{Files} pane, check its
+  box, then \textbf{More → Export\ldots{}} to save it to your computer
+\item
+  Upload that PDF to this lab's Canvas assignment
+\end{enumerate}
+
+\textbf{Troubleshooting:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{``LaTeX not found'' or ``pdflatex not found'':} Run
+  \texttt{tinytex::install\_tinytex()} in the R console, restart
+  RStudio, and try knitting to PDF again
+\item
+  \textbf{Still not working?} Knit to HTML instead and use your
+  browser's \textbf{Print → Save as PDF} option --- that's a completely
+  acceptable submission
+\end{itemize}
+
+\textbf{If only one part works:} if you get the GitHub push or the PDF
+working but not both after trying the steps above, submit what you have
+by the deadline and email me --- I'd rather see your progress than have
+a technical snag cost you credit.
+
+\textbf{Remember:} Submit BOTH to GitHub (your \texttt{.Rmd}) AND Canvas
+(the PDF). Both are required.
+
+
+
+\end{document}
