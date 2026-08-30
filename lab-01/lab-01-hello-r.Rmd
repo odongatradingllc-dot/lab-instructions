@@ -261,24 +261,26 @@ star_data %>%
 
 **Filter, plot, and calculate correlation:**
 ```{r circle-data, eval = FALSE}
-# Your code here
+circle_data <- datasaurus_dozen %>%
+  filter(dataset == "circle") 
+```
 ```
 
 ```{r circle-plot, fig.fullwidth=TRUE, eval = FALSE, fig.alt="UPDATE THIS: describe what your circle-dataset scatterplot shows, for screen-reader accessibility."}
-# Your code here
+ggplot(data = circle_data, mapping = aes(x = x, y = y)) +
+  geom_point()
 ```
 
 ```{r circle-correlation, eval = FALSE}
-# Your code here
-```
+
 
 **Write your answers:**
 
-- The correlation coefficient for the circle dataset is: [type your answer here]
+- The correlation coefficient for the circle dataset is: [-0.0683]
 
-- Compared to the dino dataset, the circle dataset's correlation is: [type your answer here]
+- Compared to the dino dataset, the circle dataset's correlation is: [very similar — both are close to zero (dino: r ≈ -0.0645, circle: r ≈ -0.0683), indicating weak linear relationships in both cases]]
 
-- What do you notice about the correlation coefficients for dino, star, and circle? [type your answer here]
+- What do you notice about the correlation coefficients for dino, star, and circle? [All three datasets have correlation coefficients that are very close to zero and nearly identical (dino ≈ -0.0645, star ≈ -0.0630, circle ≈ -0.0683)]
 
 🧶 ✅ ⬆️ *You should pause again, commit changes with the commit message "Added answer for Ex 4", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 

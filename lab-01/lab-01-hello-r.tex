@@ -598,39 +598,32 @@ dataset to \texttt{"circle"}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Your code here}
+\NormalTok{circle\_data }\OtherTok{\textless{}{-}}\NormalTok{ datasaurus\_dozen }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(dataset }\SpecialCharTok{==} \StringTok{"circle"}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+
+
+``` r
+ggplot(data = circle_data, mapping = aes(x = x, y = y)) +
+  geom_point()
+\end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Your code here}
+\SpecialCharTok{**}\NormalTok{Write your answers}\SpecialCharTok{:}\ErrorTok{**}
+
+\SpecialCharTok{{-}}\NormalTok{ The correlation coefficient }\ControlFlowTok{for}\NormalTok{ the circle dataset is}\SpecialCharTok{:}\NormalTok{ [}\SpecialCharTok{{-}}\FloatTok{0.0683}\NormalTok{]}
+
+\SpecialCharTok{{-}}\NormalTok{ Compared to the dino dataset, the circle dataset}\StringTok{\textquotesingle{}s correlation is: [very similar — both are close to zero (dino: r ≈ {-}0.0645, circle: r ≈ {-}0.0683), indicating weak linear relationships in both cases]]}
+
+\StringTok{{-} What do you notice about the correlation coefficients for dino, star, and circle? [All three datasets have correlation coefficients that are very close to zero and nearly identical (dino ≈ {-}0.0645, star ≈ {-}0.0630, circle ≈ {-}0.0683)]}
+
+\StringTok{🧶 ✅ ⬆️ *You should pause again, commit changes with the commit message "Added answer for Ex 4", and push. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Your code here}
-\end{Highlighting}
-\end{Shaded}
-
-\textbf{Write your answers:}
-
-\begin{itemize}
-\item
-  The correlation coefficient for the circle dataset is: {[}type your
-  answer here{]}
-\item
-  Compared to the dino dataset, the circle dataset's correlation is:
-  {[}type your answer here{]}
-\item
-  What do you notice about the correlation coefficients for dino, star,
-  and circle? {[}type your answer here{]}
-\end{itemize}
-
-🧶 ✅ ⬆️ \emph{You should pause again, commit changes with the commit
-message ``Added answer for Ex 4'', and push. Make sure to commit and
-push all changed files so that your Git pane is cleared up afterwards.}
 
 \begin{marginfigure}
 Facet by the dataset variable, placing the plots in a 3 column grid, and
