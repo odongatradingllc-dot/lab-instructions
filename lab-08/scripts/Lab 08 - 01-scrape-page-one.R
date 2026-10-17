@@ -12,26 +12,26 @@ library(rvest)
 # 2. Read the HTML page --------------------------------------
 # Hint: use the Edinburgh College of Art collection URL linked
 # in the Introduction section of the Rmd
-page <- read_html("___")
+page <- read_html("https://collections.ed.ac.uk/art/search/*:*/Collection:%22edinburgh+college+of+art%7C%7C%7CEdinburgh+College+of+Art%22")
 
 # 3. Select each art piece's "container" on the page -----------
 # Hint: use SelectorGadget on the page. Each piece is wrapped
 # in a <div class="item-div">
 items <- page %>%
-  html_elements("___")
+  html_elements("div.item-div")
 
 # 4. Extract titles ----------------------------------------------
 # Hint: each title lives in an <a> tag inside h3.record-title
 titles <- items %>%
-  html_element("___") %>%
+  html_element("h3.record-title a") %>%
   html_text2()
 
 # 5. Extract links to each piece's own page -----------------------
 # Hint: it's the SAME <a> tag as above - this time pull the
 # href ATTRIBUTE instead of the text
 links <- items %>%
-  html_element("___") %>%
-  html_attr("___")
+  html_element("h3.record-title a") %>%
+  html_attr("href")
 
 # 6. Extract artist names -------------------------------------------
 # TRICKY: not every piece has a listed artist! If you use
@@ -41,14 +41,14 @@ links <- items %>%
 # item with no match, so everything stays lined up, one row per item.
 # Hint: artist names live in an <a class="artist">
 artists <- items %>%
-  html_element("___") %>%
+  html_element("a.artist") %>%
   html_text2()
 
 # 7. Combine into a data frame ---------------------------------------
 uoe_art <- tibble(
-  title  = ___,
-  artist = ___,
-  link   = ___
+  title  = titles,
+  artist = artists,
+  link   = links
 )
 
 # 8. Check your work ----------------------------------------------------
