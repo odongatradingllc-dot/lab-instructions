@@ -1,6 +1,6 @@
 ---
 title: "Lab 08 - University of Edinburgh Art Collection"
-author: "Your Name"
+author: "Ken Hayes"
 output: 
   tufte::tufte_html:
     css: ../lab.css
